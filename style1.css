@@ -1,93 +1,99 @@
-/* Google Font */
-body {
-    margin: 0;
-    font-family: 'Orbitron', sans-serif;
-    background: linear-gradient(#0a0f2c, #1a1f4c);
-    color: #fff;
-    overflow-x: hidden;
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Floating clouds animation */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(circle at top, #0a1a2f, #1b1b2f, #0a1a2f);
+  color: #fff;
+  overflow-x: hidden;
 }
 
 /* Hero Section */
 .hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: url('../assets/clouds.png') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-#name {
-    font-size: 3rem;
-    color: #00f0ff;
-    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #0ff;
 }
 
-#know-btn {
-    margin-top: 20px;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    background: #00f0ff33;
-    color: #fff;
-    transition: all 0.4s ease;
+button {
+  font-size: 1.5rem;
+  padding: 12px 25px;
+  border: 2px solid #0ff;
+  border-radius: 10px;
+  background: transparent;
+  color: #0ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-#know-btn:hover {
-    background: #00f0ff88;
-    transform: scale(1.05);
-}
-
-/* Zoom Letter */
-.zoom-letter {
-    display: inline-block;
-    transition: transform 1.2s ease-in-out;
+button:hover {
+  background: #0ff;
+  color: #000;
 }
 
 /* Sections */
 section {
-    padding: 60px 20px;
+  padding: 50px 20px;
+  text-align: center;
 }
 
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #0ff;
+}
+
+/* Clouds / Cards */
+.cloud, .skill-cloud, .project-cloud, .contact-cloud {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 20px;
+  background: rgba(0,255,255,0.1);
+  border: 1px solid #0ff;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.cloud:hover, .skill-cloud:hover, .project-cloud:hover, .contact-cloud:hover {
+  transform: scale(1.05);
+}
+
+/* Hidden sections for animation */
 .hidden {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease-out;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
 }
 
-section:not(.hidden) {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Cloud style for about/project/skills */
-.cloud, .skill-cloud, .project-cloud, .achievement-cloud, .contact-cloud {
-    background: rgba(0, 240, 255, 0.2);
-    border-radius: 50px;
-    padding: 15px;
-    margin: 15px 0;
-    animation: float 3s ease-in-out infinite;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cloud:hover, .skill-cloud:hover, .project-cloud:hover, .achievement-cloud:hover, .contact-cloud:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #00f0ff;
-}
-
-/* Responsive  */
+/* Mobile responsiveness */
 @media (max-width: 768px) {
-    #name { font-size: 2.2rem; }
-    #know-btn { font-size: 1rem; padding: 12px 25px; }
-    section { padding: 40px 15px; }
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+
+  .cloud, .skill-cloud, .project-cloud, .contact-cloud {
+    padding: 10px 15px;
+  }
 }
