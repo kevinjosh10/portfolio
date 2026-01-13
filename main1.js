@@ -5,7 +5,7 @@ const zoomLetter = document.querySelector('.zoom-letter');
 // Select all sections that are hidden
 const hiddenSections = document.querySelectorAll('section.hidden');
 
-// Function to reveal sections with a smooth staggered animation
+// Function to reveal sections  with a smooth staggered animation
 function revealSections() {
     hiddenSections.forEach((section, index) => {
         setTimeout(() => {

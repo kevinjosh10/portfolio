@@ -85,7 +85,7 @@ section:not(.hidden) {
     box-shadow: 0 0 20px #00f0ff;
 }
 
-/* Responsive */
+/* Responsive  */
 @media (max-width: 768px) {
     #name { font-size: 2.2rem; }
     #know-btn { font-size: 1rem; padding: 12px 25px; }
