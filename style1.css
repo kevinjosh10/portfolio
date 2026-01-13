@@ -6,64 +6,116 @@
 
 body {
   font-family: 'Orbitron', sans-serif;
-  background: radial-gradient(circle at top, #0b1d3a, #020617);
-  color: #ffffff;
-  text-align: center;
+  background: #020617;
+  color: white;
+  overflow-x: hidden;
 }
 
+/* 🌌 STARS */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/img/stars.png");
+  animation: moveStars 60s linear infinite;
+  z-index: -2;
+}
+
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to { background-position: -2000px 2000px; }
+}
+
+/* ☁️ CLOUDS */
+.clouds {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("https://i.imgur.com/mHbScrQ.png");
+  opacity: 0.2;
+  animation: moveClouds 120s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveClouds {
+  from { background-position: 0 0; }
+  to { background-position: 3000px 0; }
+}
+
+/* HERO */
 .hero {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .hero h1 {
   font-size: 3rem;
-  color: #00ffff;
+  color: cyan;
+}
+
+.tagline {
+  margin: 10px 0 20px;
+  opacity: 0.8;
 }
 
 button {
-  margin-top: 20px;
   padding: 15px 30px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   background: transparent;
-  border: 2px solid #00ffff;
-  color: #00ffff;
+  border: 2px solid cyan;
+  color: cyan;
   border-radius: 12px;
   cursor: pointer;
 }
 
 button:hover {
-  background: #00ffff;
-  color: #000;
+  background: cyan;
+  color: black;
 }
 
-section {
-  padding: 40px 20px;
+/* SECTIONS */
+.section {
+  padding: 60px 20px;
+  text-align: center;
 }
 
-.hidden {
-  display: none;
+.section h2 {
+  color: cyan;
+  margin-bottom: 20px;
 }
 
+/* CLOUD CARDS */
 .cloud {
-  margin: 12px auto;
-  padding: 15px;
-  width: fit-content;
-  background: rgba(0, 255, 255, 0.15);
-  border: 1px solid #00ffff;
-  border-radius: 20px;
+  display: inline-block;
+  margin: 10px;
+  padding: 15px 20px;
+  background: rgba(0,255,255,0.12);
+  border: 1px solid cyan;
+  border-radius: 25px;
+  transition: transform 0.3s;
 }
 
-a {
-  color: #00ffff;
-  text-decoration: none;
+.cloud:hover {
+  transform: scale(1.08);
 }
 
+/* ANIMATION */
+.hidden {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease;
+}
+
+/* MOBILE */
 @media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.2rem;
-  }
+  .hero h1 { font-size: 2.2rem; }
 }
