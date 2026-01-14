@@ -1,73 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Kevin Joshua | Cloud Engineer</title>
+  <meta charset="UTF-8" />
+  <title>Kevin Joshua | Cloud Engineer Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Futuristic Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style1.css">
 </head>
 <body>
 
-<!-- Animated Background -->
-<div class="stars"></div>
-<div class="clouds"></div>
+<!-- 3D Background Layers -->
+<div class="stars-layer"></div>
+<div class="stars-layer deep"></div>
+<div class="cloud-layer"></div>
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Kevin Joshua</h1>
-  <p class="tagline">Cloud Engineering Enthusiast ☁️🚀</p>
-  <button id="knowBtn">Know About Me</button>
+  <div class="cloud-card hero-card">
+    <h1>Kevin Joshua</h1>
+    <p class="tagline">Cloud Engineering Enthusiast • AWS • Future Cloud Architect</p>
+    <button id="knowBtn">Know About Me</button>
+  </div>
 </section>
 
 <!-- ABOUT -->
 <section id="about" class="section hidden">
-  <h2><span id="aboutB">A</span>bout Me</h2>
-  <p>
-    I'm Kevin Josh, an 18-year-old first-year B.E CSE student at Jerusalem College of Engineering.
-    I'm deeply passionate about Cloud Engineering and AWS. I'm preparing for AWS Cloud Practitioner
-    and building real-world projects like a Geofenced Smart Attendance System.
-    My goal is to work as a Cloud Engineer in Japan.
-  </p>
+  <div class="cloud-card">
+    <h2>About Me</h2>
+    <p>
+      I’m Kevin Josh, an 18-year-old first-year B.E. Computer Science & Engineering student at
+      Jerusalem College of Engineering, Chennai. I am deeply passionate about Cloud Engineering
+      and continuously work on strengthening my fundamentals in AWS, cloud architecture, and
+      real-world system design.
+      <br><br>
+      I’m currently preparing for the AWS Cloud Practitioner certification and following a
+      long-term roadmap toward Solutions Architect Associate, Professional, and Security
+      Specialty certifications. I strongly believe in learning by building, which led me to
+      create a Geofenced Smart Attendance System using AWS services.
+      <br><br>
+      My long-term goal is to work as a Cloud Engineer in a top global tech company, preferably
+      in Japan, while contributing to cloud communities and building an AWS Cloud Club in my
+      college.
+    </p>
+  </div>
 </section>
 
 <!-- SKILLS -->
 <section class="section hidden">
-  <h2>Skills</h2>
-  <div class="cloud">AWS</div>
-  <div class="cloud">HTML</div>
-  <div class="cloud">CSS</div>
-  <div class="cloud">Python</div>
+  <div class="cloud-card">
+    <h2>Skills</h2>
+    <div class="pill">AWS</div>
+    <div class="pill">HTML</div>
+    <div class="pill">CSS</div>
+    <div class="pill">Python</div>
+  </div>
 </section>
 
 <!-- ROADMAP -->
 <section class="section hidden">
-  <h2>AWS Roadmap</h2>
-  <div class="cloud">Cloud Practitioner</div>
-  <div class="cloud">Solutions Architect – Associate</div>
-  <div class="cloud">Solutions Architect – Professional</div>
-  <div class="cloud">Security Specialty</div>
+  <div class="cloud-card">
+    <h2>AWS Roadmap</h2>
+    <div class="pill">Cloud Practitioner</div>
+    <div class="pill">Solutions Architect – Associate</div>
+    <div class="pill">Solutions Architect – Professional</div>
+    <div class="pill">Security Specialty</div>
+  </div>
 </section>
 
 <!-- PROJECT -->
 <section class="section hidden">
-  <h2>Project</h2>
-  <div class="cloud">
-    Geofenced Smart Attendance System (300m radius) using AWS S3, Lambda & API Gateway
+  <div class="cloud-card">
+    <h2>Project</h2>
+    <p>
+      <strong>Geofenced Smart Attendance System</strong><br><br>
+      A cloud-based attendance system that allows attendance to be marked only when a student
+      is physically present within a 300-meter radius of the college campus. Built using AWS S3,
+      Lambda, API Gateway, and backend logic to ensure accuracy and prevent proxy attendance.
+    </p>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="section hidden">
-  <h2>Contact</h2>
-  <div class="cloud">
-    <a href="https://www.linkedin.com/in/kevin-josh10" target="_blank">LinkedIn</a>
-  </div>
-  <div class="cloud">
-    <a href="mailto:kingkevinjosh7@gmail.com">kingkevinjosh7@gmail.com</a>
+  <div class="cloud-card">
+    <h2>Contact</h2>
+    <p>
+      <a class="linkedin" href="https://www.linkedin.com/in/kevin-josh10" target="_blank">
+        LinkedIn Profile
+      </a>
+    </p>
+    <p>
+      <a class="email" href="mailto:kingkevinjosh7@gmail.com">
+        kingkevinjosh7@gmail.com
+      </a>
+    </p>
   </div>
 </section>
 
