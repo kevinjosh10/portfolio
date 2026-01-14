@@ -5,47 +5,10 @@
 }
 
 body {
-  font-family: 'Orbitron', sans-serif;
-  background: #050816;
-  color: #eaf6ff;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #020617, #000);
+  color: #eaf4ff;
   overflow-x: hidden;
-}
-
-/* ⭐ 3D STAR BACKGROUND */
-.stars-layer {
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background: url("https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/img/stars.png");
-  animation: starsMove 80s linear infinite;
-  opacity: 0.6;
-  z-index: -3;
-}
-
-.stars-layer.deep {
-  animation-duration: 160s;
-  opacity: 0.3;
-}
-
-@keyframes starsMove {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-1000px, 800px); }
-}
-
-/* ☁️ CLOUD LAYER */
-.cloud-layer {
-  position: fixed;
-  width: 200%;
-  height: 100%;
-  background: url("https://i.imgur.com/mHbScrQ.png");
-  animation: cloudsMove 120s linear infinite;
-  opacity: 0.25;
-  z-index: -2;
-}
-
-@keyframes cloudsMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(-1500px); }
 }
 
 /* HERO */
@@ -56,58 +19,53 @@ body {
   align-items: center;
 }
 
-.hero-card h1 {
-  font-size: 3rem;
-  color: #7df9ff;
-}
-
-.tagline {
-  margin: 10px 0 20px;
-  color: #c7eaff;
-}
-
-/* CLOUD CARD */
-.cloud-card {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(18px);
-  border-radius: 28px;
-  padding: 30px;
-  max-width: 900px;
+/* CARDS */
+.card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 32px;
+  max-width: 850px;
   margin: auto;
-  box-shadow: 0 0 40px rgba(125, 249, 255, 0.2);
+  box-shadow: 0 0 60px rgba(120,200,255,0.25);
   text-align: center;
 }
 
 /* BUTTON */
 button {
-  padding: 14px 30px;
-  font-size: 1.1rem;
+  margin-top: 20px;
+  padding: 14px 32px;
+  font-size: 1rem;
   border-radius: 14px;
-  border: 2px solid #7df9ff;
-  background: transparent;
-  color: #7df9ff;
+  border: none;
+  background: #7dd3fc;
+  color: #020617;
   cursor: pointer;
-}
-
-button:hover {
-  background: #7df9ff;
-  color: #050816;
 }
 
 /* SECTIONS */
 .section {
-  padding: 70px 20px;
-}
-
-.hidden {
+  padding: 80px 20px;
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateY(80px);
+  transition: 1.2s ease;
 }
 
-.show {
+.section.show {
   opacity: 1;
   transform: translateY(0);
-  transition: all 1s ease;
+}
+
+/* FLOAT EFFECT */
+.float {
+  transition-delay: 0.2s;
+}
+
+/* ZOOM LETTER */
+#zoomB {
+  display: inline-block;
+  color: #7dd3fc;
+  font-weight: 700;
 }
 
 /* PILLS */
@@ -115,8 +73,8 @@ button:hover {
   display: inline-block;
   margin: 8px;
   padding: 10px 18px;
-  background: rgba(125, 249, 255, 0.18);
   border-radius: 20px;
+  background: rgba(125,211,252,0.2);
 }
 
 /* LINKS */
@@ -129,9 +87,30 @@ button:hover {
   color: #9ae6ff;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-  .hero-card h1 {
-    font-size: 2.2rem;
-  }
+/* GLOWING CLOUDS */
+.cloud {
+  position: fixed;
+  width: 400px;
+  height: 200px;
+  background: rgba(200,240,255,0.25);
+  filter: blur(60px);
+  border-radius: 50%;
+  animation: floatClouds 40s linear infinite;
+  z-index: -1;
+}
+
+.cloud1 { top: 20%; left: 10%; }
+.cloud2 { top: 50%; left: 60%; animation-duration: 55s; }
+.cloud3 { top: 75%; left: 30%; animation-duration: 70s; }
+
+@keyframes floatClouds {
+  from { transform: translateX(0); }
+  to { transform: translateX(-1200px); }
+}
+
+/* CANVAS */
+#stars {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
 }
