@@ -1,689 +1,326 @@
-/* =============================================================================
-   MASTER PORTFOLIO - SPACE CLOUD THEME
-   Kevin Joshua | Cloud Engineer | 2026
-   Mobile-First | Letter-by-Letter Animations | Neon Glow | Floating Stars
-   ============================================================================= */
-
-/* ==========================================================================
-   1. RESET & BASE STYLES
-   ========================================================================== */
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
-html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-}
-
-body {
-    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    overflow-x: hidden;
-    color: #dfe0e4;
+body { 
+    font-family: 'Space Grotesk', sans-serif; 
+    overflow-x: hidden; 
+    color: #dfe0e4; 
     min-height: 100vh;
-    background: 
-        radial-gradient(ellipse 80% 60% at 20% 20%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(120, 119, 198, 0.12) 0%, transparent 70%),
-        #0a0f1e;
+    background: radial-gradient(ellipse at bottom, #1b1b33 0%, #0f0f23 50%, #000 100%);
     position: relative;
 }
 
-/* Canvas Starfield */
-#stars-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+#stars-canvas { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: -1; 
+    width: 100%; 
     height: 100vh;
-    z-index: -1;
-    pointer-events: none;
 }
 
-/* ==========================================================================
-   2. MAIN LAYOUT
-   ========================================================================== */
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+.container { 
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    position: relative; 
+    z-index: 10; 
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
     justify-content: center;
-    gap: 2rem;
 }
 
-/* Content Wrapper - HIDDEN until button click */
-#content-wrapper {
-    display: none;
-    opacity: 0;
-    transform: scale(0.95);
-    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+header { 
+    text-align: center; 
+    padding: 2rem 1rem; 
 }
 
-#content-wrapper.show {
-    display: block;
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* ==========================================================================
-   3. HEADER & HERO SECTION
-   ========================================================================== */
-.hero-header {
-    text-align: center;
-    padding: 3rem 1rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-
-.neon-glow {
+.neon-glow { 
     text-shadow: 
-        0 0 5px #00f5ff,
-        0 0 10px #00f5ff,
-        0 0 15px #00f5ff,
-        0 0 20px #00f5ff,
-        0 0 30px #00f5ff,
-        0 0 40px rgba(0, 245, 255, 0.5);
-    color: #ffffff;
-    font-weight: 700;
-    line-height: 1.1;
-    position: relative;
-}
-
-.title-float {
-    animation: titleFloat 6s ease-in-out infinite;
-    font-size: clamp(3rem, 8vw, 6rem);
+        0 0 5px #00f5ff, 
+        0 0 10px #00f5ff, 
+        0 0 15px #00f5ff, 
+        0 0 20px #00f5ff, 
+        0 0 30px #00f5ff;
+    color: #fff; 
+    font-size: clamp(2.5rem, 6vw, 5rem); 
+    font-weight: 700; 
     margin-bottom: 1rem;
+    animation: glow 3s ease-in-out infinite alternate; 
 }
 
-@keyframes titleFloat {
-    0%, 100% { transform: translateY(0px) rotateX(0deg); }
-    50% { transform: translateY(-25px) rotateX(2deg); }
+@keyframes glow { 
+    from { 
+        text-shadow: 
+            0 0 5px #00f5ff, 
+            0 0 10px #00f5ff, 
+            0 0 20px #00f5ff,
+            0 0 30px #00f5ff;
+    } 
+    to { 
+        text-shadow: 
+            0 0 10px #00f5ff, 
+            0 0 20px #00f5ff, 
+            0 0 40px #00f5ff,
+            0 0 50px #00f5ff;
+    } 
 }
 
-.subtitle {
-    font-size: clamp(1.3rem, 4vw, 2rem);
-    opacity: 0.92;
+.title-float { 
+    animation: float 6s ease-in-out infinite; 
+}
+
+@keyframes float { 
+    0%, 100% { transform: translateY(0px); } 
+    50% { transform: translateY(-25px); } 
+}
+
+.subtitle { 
+    font-size: clamp(1.2rem, 3vw, 1.5rem); 
+    margin: 1.5rem 0; 
+    opacity: 0.9; 
     font-weight: 400;
-    letter-spacing: 0.05em;
-    max-width: 600px;
-    margin: 0 auto;
 }
 
-/* ==========================================================================
-   4. LETTER-BY-LETTER ANIMATION SYSTEM (CORE FEATURE)
-   ========================================================================== */
-.letter,
-.skill-letter,
-.space-letter,
-.roadmap-letter,
-.period,
-.dash {
+#know-container { 
+    position: relative; 
     display: inline-block;
-    opacity: 0;
-    transform: 
-        translate(var(--lx, 0px), var(--ly, 150px)) 
-        rotateY(180deg) 
-        rotateZ(var(--lz, 0deg)) 
-        scale(0.1) 
-        skewX(20deg);
-    transition: all 1.8s cubic-bezier(0.23, 0.12, 0.34, 1.1);
-    position: relative;
-    will-change: transform, opacity;
-    pointer-events: none;
 }
 
-.letter.animate,
-.skill-letter.animate,
-.space-letter.animate,
-.roadmap-letter.animate,
-.period.animate,
-.dash.animate {
-    opacity: 1;
-    transform: 
-        translate(0px, 0px) 
-        rotateY(0deg) 
-        rotateZ(0deg) 
-        scale(1) 
-        skewX(0deg);
-}
-
-/* Letter glow trails */
-.letter::after,
-.skill-letter::after {
-    content: attr(data-letter);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    color: rgba(0, 245, 255, 0.3);
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
-    animation: letterTrail 2s ease-out forwards;
-}
-
-@keyframes letterTrail {
-    0% { opacity: 1; transform: translateY(10px); }
-    100% { opacity: 0; transform: translateY(30px); }
-}
-
-/* ==========================================================================
-   5. KNOW ABOUT ME BUTTON
-   ========================================================================== */
-.button-container {
-    position: relative;
-    display: inline-block;
-    perspective: 1000px;
-}
-
-.neon-btn {
-    background: rgba(10, 15, 30, 0.8);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(0, 245, 255, 0.6);
-    color: #00f5ff;
-    padding: 1.5rem 3rem;
-    font-size: clamp(1.1rem, 3vw, 1.4rem);
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 60px;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.neon-btn { 
+    background: transparent; 
+    border: 2px solid #00f5ff; 
+    color: #00f5ff; 
+    padding: 1.2rem 2.5rem; 
+    font-size: 1.3rem; 
+    cursor: pointer; 
+    border-radius: 50px; 
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
     box-shadow: 
-        0 0 25px rgba(0, 245, 255, 0.3),
-        0 0 50px rgba(0, 245, 255, 0.1),
-        inset 0 0 20px rgba(0, 245, 255, 0.05);
+        0 0 15px rgba(0, 245, 255, 0.3),
+        inset 0 0 10px rgba(0, 245, 255, 0.1);
+    font-family: inherit;
+    font-weight: 500;
     position: relative;
     overflow: hidden;
-    letter-spacing: 0.05em;
-    min-height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.neon-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.2), transparent);
-    transition: left 0.6s;
-}
-
-.neon-btn:hover::before {
-    left: 100%;
-}
-
-.neon-btn:hover {
+.neon-btn:hover { 
     box-shadow: 
-        0 0 40px rgba(0, 245, 255, 0.6),
-        0 0 80px rgba(0, 245, 255, 0.3),
-        inset 0 0 30px rgba(0, 245, 255, 0.15);
-    transform: translateY(-8px) scale(1.05) rotateX(10deg);
-    border-color: #00f5ff;
+        0 0 30px rgba(0, 245, 255, 0.6),
+        inset 0 0 20px rgba(0, 245, 255, 0.2);
+    transform: translateY(-3px) scale(1.05); 
 }
 
-.massive-glow {
-    box-shadow: 
-        0 0 40px rgba(0, 245, 255, 0.4),
-        0 0 80px rgba(0, 245, 255, 0.2),
-        0 0 120px rgba(0, 245, 255, 0.1),
-        inset 0 0 30px rgba(0, 245, 255, 0.1);
+.particle-fade { 
+    overflow: hidden;
 }
 
-/* ==========================================================================
-   6. SECTION STYLES
-   ========================================================================== */
-.section {
-    max-width: 800px;
-    margin: 0 auto 4rem;
-    padding: 3rem 2.5rem;
-    background: rgba(10, 15, 30, 0.6);
-    backdrop-filter: blur(25px);
-    border: 1px solid rgba(0, 245, 255, 0.15);
-    border-radius: 25px;
+.section { 
+    max-width: 700px; 
+    margin: 0 auto 3rem; 
+    padding: 2.5rem 2rem; 
+    background: rgba(10, 15, 30, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    border-radius: 20px;
     position: relative;
-    box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.drift-section {
-    display: none;
-    opacity: 0;
-    transform: scale(0.8) translateY(100px) rotateX(-15deg);
+.drift-in { 
+    opacity: 0; 
+    transform: translate(var(--drift-x, 0), var(--drift-y, 100px)) scale(0.7) rotateY(10deg); 
     transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.drift-section.show {
-    display: block;
-    opacity: 1;
-    transform: scale(1) translateY(0) rotateX(0deg);
+.drift-in.show { 
+    opacity: 1; 
+    transform: translate(0, 0) scale(1) rotateY(0deg); 
 }
 
-.section-title {
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    margin-bottom: 2.5rem;
+.section h2 { 
+    font-size: clamp(1.8rem, 5vw, 3rem); 
+    margin-bottom: 1.5rem; 
     text-align: center;
 }
 
-.project-title {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
-    color: #00f5ff;
-    margin: 1.5rem 0;
+.section h3 { 
+    color: #00f5ff; 
+    font-size: 1.4rem; 
+    margin: 1rem 0 0.8rem; 
     text-align: center;
 }
 
-/* ==========================================================================
-   7. AWS ROADMAP
-   ========================================================================== */
-.roadmap-list {
-    list-style: none;
-    counter-reset: roadmap-counter;
-    max-width: 600px;
+.section p { 
+    line-height: 1.8; 
+    font-size: 1.15rem; 
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+ul { 
+    list-style: none; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
+    gap: 1.2rem; 
+    justify-items: center;
+}
+
+ul li { 
+    background: rgba(0, 245, 255, 0.1); 
+    padding: 1.2rem 1.5rem; 
+    border-radius: 15px; 
+    text-align: center; 
+    border: 1px solid rgba(0, 245, 255, 0.4); 
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.1);
+}
+
+ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 245, 255, 0.2);
+    border-color: #00f5ff;
+}
+
+/* AWS Roadmap Styling */
+.roadmap-list { 
+    list-style: none; 
+    counter-reset: roadmap;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 0;
 }
 
-.roadmap-list li {
-    counter-increment: roadmap-counter;
-    background: linear-gradient(135deg, rgba(0, 245, 255, 0.12), rgba(0, 150, 255, 0.08));
-    backdrop-filter: blur(15px);
-    padding: 2rem 2.5rem;
-    margin: 1.5rem 0;
-    border-radius: 20px;
-    border: 1px solid rgba(0, 245, 255, 0.2);
+.roadmap-list li { 
+    counter-increment: roadmap; 
+    background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(0,150,255,0.1)); 
+    padding: 1.5rem 2rem; 
+    margin: 1rem 0; 
+    border-radius: 15px; 
     border-left: 5px solid #00f5ff;
     position: relative;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.4),
-        0 0 25px rgba(0, 245, 255, 0.1);
-    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 245, 255, 0.1);
 }
 
-.roadmap-list li::before {
-    content: counter(roadmap-counter, decimal-leading-zero);
-    position: absolute;
-    left: -45px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(45deg, #00f5ff, #00bfff);
-    color: #000;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 
-        0 0 20px rgba(0, 245, 255, 0.6),
-        inset 0 2px 4px rgba(255, 255, 255, 0.2);
-    z-index: 2;
+.roadmap-list li::before { 
+    content: counter(roadmap); 
+    position: absolute; 
+    left: -35px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: linear-gradient(45deg, #00f5ff, #00bfff); 
+    color: #000; 
+    width: 30px; 
+    height: 30px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
+    font-size: 1rem;
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
 }
 
 .roadmap-list li:hover {
-    transform: translateX(15px) scale(1.02);
-    box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.6),
-        0 0 40px rgba(0, 245, 255, 0.3);
-    border-color: #00f5ff;
+    transform: translateX(10px);
+    box-shadow: 0 15px 35px rgba(0, 245, 255, 0.25);
 }
 
-/* ==========================================================================
-   8. SKILLS GRID
-   ========================================================================== */
-.skills-grid {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1.5rem;
-    justify-items: center;
-    padding: 1rem 0;
+.contact-links { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5rem; 
+    justify-content: center;
 }
 
-.skills-grid li {
-    background: linear-gradient(135deg, rgba(0, 245, 255, 0.15), rgba(0, 150, 255, 0.1));
-    backdrop-filter: blur(15px);
-    padding: 1.8rem 1.5rem;
-    border-radius: 18px;
+.linkedin { 
+    color: #0077b5; 
+    font-size: 1.3rem; 
+    text-decoration: none; 
+    padding: 1.3rem 2rem; 
+    background: rgba(0,119,181,0.15); 
+    border-radius: 15px; 
+    border: 2px solid #0077b5; 
+    transition: all 0.4s ease;
+    font-weight: 500;
+    display: block;
     text-align: center;
-    border: 1px solid rgba(0, 245, 255, 0.3);
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 1.2rem;
-    letter-spacing: 0.03em;
+    box-shadow: 0 5px 15px rgba(0,119,181,0.2);
 }
 
-.skills-grid li:hover {
-    transform: translateY(-12px) scale(1.05);
-    box-shadow: 
-        0 25px 50px rgba(0, 0, 0, 0.5),
-        0 0 35px rgba(0, 245, 255, 0.4);
-    border-color: #00f5ff;
+.linkedin:hover { 
+    background: linear-gradient(45deg, #0077b5, #005f8d); 
+    color: white; 
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,119,181,0.4);
 }
 
-/* ==========================================================================
-   9. PROJECT DESCRIPTION
-   ========================================================================== */
-.drift-para {
-    line-height: 1.9;
-    font-size: 1.2rem;
+.email { 
+    color: #00f5ff; 
+    font-size: 1.3rem; 
+    text-decoration: none; 
+    padding: 1.3rem 2rem; 
+    background: rgba(0,245,255,0.15); 
+    border-radius: 15px; 
+    border: 2px solid #00f5ff; 
+    transition: all 0.4s ease;
+    font-weight: 500;
+    display: block;
     text-align: center;
-    margin-bottom: 1.5rem;
-    opacity: 0.95;
+    box-shadow: 0 5px 15px rgba(0,245,255,0.2);
 }
 
-.project-desc {
-    max-width: 700px;
-    margin: 0 auto;
+.email:hover { 
+    background: linear-gradient(45deg, #00f5ff, #00d4ff); 
+    color: #000; 
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,245,255,0.4);
 }
 
-/* ==========================================================================
-   10. CONTACT SECTION
-   ========================================================================== */
-.contact-links {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
+.hidden { 
+    display: none; 
 }
 
-.contact-link {
-    font-size: 1.4rem;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 1.6rem 3rem;
-    border-radius: 20px;
-    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-}
-
-.linkedin {
-    color: #0077b5;
-    background: rgba(0, 119, 181, 0.15);
-    border: 2px solid rgba(0, 119, 181, 0.6);
-}
-
-.linkedin:hover {
-    background: linear-gradient(45deg, #0077b5, #005f8d);
-    color: white;
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 
-        0 25px 50px rgba(0, 119, 181, 0.5),
-        0 0 40px rgba(0, 119, 181, 0.3);
-}
-
-.email {
-    color: #00f5ff;
-    background: rgba(0, 245, 255, 0.15);
-    border: 2px solid rgba(0, 245, 255, 0.6);
-}
-
-.email:hover {
-    background: linear-gradient(45deg, #00f5ff, #00d4ff);
-    color: #000;
-    transform: translateY(-8px) scale(1.05);
-    box-shadow: 
-        0 25px 50px rgba(0, 245, 255, 0.5),
-        0 0 40px rgba(0, 245, 255, 0.3);
-}
-
-/* ==========================================================================
-   11. MILKY WAY BACKGROUND OVERLAYS
-   ========================================================================== */
+/* Milky Way drift overlay */
 body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    content: ''; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
     z-index: -1;
     background: 
-        radial-gradient(ellipse 70% 50% at 30% 10%, rgba(120, 119, 198, 0.25) 0%, transparent 60%),
-        radial-gradient(ellipse 30% 40% at 85% 85%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 40% 30% at 10% 70%, rgba(120, 219, 255, 0.2) 0%, transparent 60%);
-    animation: milkyWayDrift 35s ease-in-out infinite;
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(120,119,198,0.3) 0%, transparent 50%),
+        radial-gradient(ellipse 20% 30% at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(120,119,198,0.2) 0%, transparent 50%);
+    animation: milkyDrift 25s ease-in-out infinite;
     pointer-events: none;
 }
 
-@keyframes milkyWayDrift {
-    0%, 100% { 
-        transform: translateX(0%) translateY(0%) rotate(0deg) scale(1); 
-    }
-    25% { 
-        transform: translateX(-1.5%) translateY(-0.8%) rotate(0.3deg) scale(1.02); 
-    }
-    50% { 
-        transform: translateX(0.8%) translateY(-1.2%) rotate(-0.2deg) scale(1.01); 
-    }
-    75% { 
-        transform: translateX(-0.5%) translateY(-0.3%) rotate(0.1deg) scale(1.015); 
-    }
+@keyframes milkyDrift { 
+    0%, 100% { transform: translateX(0%) translateY(0%) rotate(0deg); } 
+    33% { transform: translateX(-2%) translateY(-1%) rotate(0.5deg); }
+    66% { transform: translateX(1%) translateY(-2%) rotate(-0.5deg); }
 }
 
-/* ==========================================================================
-   12. RESPONSIVE DESIGN (MOBILE-FIRST)
-   ========================================================================== */
-@media (max-width: 480px) {
-    .container { padding: 15px; }
-    .section { 
-        padding: 2rem 1.5rem; 
-        margin-bottom: 3rem;
-        border-radius: 20px;
-    }
-    .hero-header { padding: 2rem 1rem; }
-    .neon-glow { 
-        font-size: clamp(2.2rem, 7vw, 4rem); 
-        line-height: 1;
-    }
-    .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-        gap: 1.2rem;
-    }
-    .skills-grid li { 
-        padding: 1.5rem 1.2rem; 
-        font-size: 1.1rem;
-        min-height: 70px;
-    }
-    .roadmap-list li {
-        padding: 1.8rem 2rem;
-        margin: 1.2rem 0;
-    }
-    .roadmap-list li::before {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-        left: -40px;
-    }
-    .drift-para {
-        font-size: 1.1rem;
-        line-height: 1.7;
-    }
+/* Mobile-first responsive */
+@media (max-width: 768px) { 
+    .container { padding: 15px; } 
+    .section { padding: 1.5rem 1rem; margin-bottom: 2rem; }
+    .neon-glow { font-size: clamp(2rem, 8vw, 3.5rem); }
+    ul { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; }
+    .roadmap-list li { padding: 1.2rem 1.5rem; }
+    .roadmap-list li::before { left: -28px; width: 26px; height: 26px; font-size: 0.9rem; }
 }
 
-@media (max-width: 768px) {
-    .container { padding: 20px; }
-    .section { padding: 2.5rem 2rem; }
-    .contact-links { gap: 1.5rem; }
-    .neon-btn { 
-        padding: 1.3rem 2.5rem; 
-        font-size: 1.2rem; 
-        min-height: 65px;
-    }
+@media (min-width: 768px) { 
+    .container { padding: 40px; } 
+    .section { padding: 3rem; }
+    .contact-links { flex-direction: row; justify-content: center; }
 }
-
-@media (min-width: 769px) {
-    .container { padding: 40px 30px; }
-    .section { padding: 4rem 3.5rem; }
-    .hero-header { padding: 4rem 2rem; }
-    .contact-links { 
-        flex-direction: row; 
-        gap: 2.5rem; 
-        justify-content: center;
-    }
-}
-
-@media (min-width: 1200px) {
-    .container { 
-        max-width: 1000px; 
-        padding: 50px 40px; 
-    }
-    .section { 
-        max-width: 900px; 
-        margin-left: auto; 
-        margin-right: auto;
-    }
-}
-
-/* ==========================================================================
-   13. PERFORMANCE & ACCESSIBILITY
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-    }
-    .letter,
-    .skill-letter {
-        transition: none !important;
-        opacity: 1 !important;
-        transform: none !important;
-    }
-}
-
-@media (hover: none) and (pointer: coarse) {
-    .neon-btn:hover,
-    .skills-grid li:hover,
-    .roadmap-list li:hover,
-    .contact-link:hover {
-        transform: none;
-    }
-}
-
-/* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .section {
-        backdrop-filter: blur(30px);
-    }
-    .neon-glow {
-        text-shadow: 
-            0 0 8px #00f5ff,
-            0 0 16px #00f5ff,
-            0 0 24px #00f5ff,
-            0 0 32px #00f5ff,
-            0 0 48px rgba(0, 245, 255, 0.6);
-    }
-}
-
-/* Print styles */
-@media print {
-    body { 
-        background: white !important; 
-        color: black !important; 
-    }
-    .neon-glow, .section { 
-        box-shadow: none !important; 
-        border: 1px solid #ccc !important;
-        text-shadow: none !important;
-    }
-    #stars-canvas { display: none !important; }
-}
-
-/* ==========================================================================
-   14. SCROLL INDICATOR
-   ========================================================================== */
-.scroll-indicator {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: linear-gradient(90deg, #00f5ff, #00bfff);
-    z-index: 1000;
-    box-shadow: 0 0 15px rgba(0, 245, 255, 0.6);
-    transition: width 0.3s ease;
-}
-
-/* Focus styles for accessibility */
-button:focus,
-a:focus {
-    outline: 3px solid #00f5ff;
-    outline-offset: 3px;
-}
-
-/* ==========================================================================
-   15. LOADING STATE
-   ========================================================================== */
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #0a0f1e 0%, #1a1f2e 50%, #0a0f1e 100%);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-    transition: opacity 0.8s ease-out;
-}
-
-.loading-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.loading-spinner {
-    width: 60px;
-    height: 60px;
-    border: 3px solid rgba(0, 245, 255, 0.2);
-    border-top: 3px solid #00f5ff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* ==========================================================================
-   END OF STYLESHEET - TOTAL: 1024+ LINES
-   Deploy to kevinjosh10.github.io for live space-cloud magic ✨
-   ========================================================================== */
