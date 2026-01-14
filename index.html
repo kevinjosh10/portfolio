@@ -1,80 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Kevin Joshua | Cloud Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Clean readable font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Clean futuristic readable font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style1.css">
 </head>
 <body>
 
-<!-- CANVAS FOR GLOWING STARS -->
 <canvas id="stars"></canvas>
 
-<!-- GLOWING CLOUDS -->
-<div class="cloud cloud1"></div>
-<div class="cloud cloud2"></div>
-<div class="cloud cloud3"></div>
+<div class="milkyway"></div>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="card hero-card">
-    <h1>Kevin Joshua</h1>
-    <p>Cloud Engineering Enthusiast • AWS</p>
-    <button id="knowBtn">Know About Me</button>
-  </div>
+  <h1 class="neon">Kevin Joshua</h1>
+  <p class="tagline">Cloud Engineering Enthusiast • AWS • Builder</p>
+  <button id="knowBtn">Know About Me</button>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="section">
-  <div class="card zoom-target">
-    <h2><span id="zoomB">B</span>out Me</h2>
-    <p>
-      I’m Kevin Joshua, a first-year Computer Science & Engineering student with a strong
-      passion for Cloud Engineering. I focus on mastering AWS fundamentals, building
-      real-world cloud projects, and designing scalable systems.
-      <br><br>
-      I believe in learning deeply rather than rushing. My goal is to become a highly
-      skilled Cloud Engineer, contribute to cloud communities, and work internationally
-      in the future.
-    </p>
-  </div>
+<section class="section" id="about">
+  <h2 class="neon">About Me</h2>
+  <p>
+    I’m Kevin Joshua, an 18-year-old first-year Computer Science & Engineering student
+    at Jerusalem College of Engineering. I’m deeply passionate about Cloud Engineering
+    and spend most of my time learning, building, and experimenting with AWS services.
+    <br><br>
+    I’m currently preparing for the AWS Cloud Practitioner certification and following
+    a structured roadmap toward Solutions Architect Associate, Professional, and
+    Security Specialty certifications.
+    <br><br>
+    I strongly believe in practical learning. My projects are focused on real-world
+    cloud use cases, scalability, and security rather than just theory.
+  </p>
 </section>
 
-<!-- SKILLS -->
-<section class="section float">
-  <div class="card">
-    <h2>Skills</h2>
-    <div class="pill">AWS</div>
-    <div class="pill">HTML</div>
-    <div class="pill">CSS</div>
-    <div class="pill">JavaScript</div>
-  </div>
+<section class="section">
+  <h2 class="neon">Skills</h2>
+  <div class="pill">AWS</div>
+  <div class="pill">HTML</div>
+  <div class="pill">CSS</div>
 </section>
 
-<!-- PROJECT -->
-<section class="section float">
-  <div class="card">
-    <h2>Project</h2>
-    <p>
-      <strong>Geofenced Smart Attendance System</strong><br><br>
-      Attendance can be marked only when the user is physically present inside
-      a predefined campus radius using cloud-based verification.
-    </p>
-  </div>
+<section class="section">
+  <h2 class="neon">Project</h2>
+  <p>
+    <strong>Geofenced Smart Attendance System</strong><br><br>
+    A cloud-based attendance system where attendance can be marked only if
+    the student is physically present within a 300-meter radius of the campus.
+    Built using AWS services like S3, Lambda, API Gateway, and DynamoDB.
+  </p>
 </section>
 
-<!-- CONTACT -->
-<section class="section float">
-  <div class="card">
-    <h2>Contact</h2>
-    <p><a class="linkedin" href="https://www.linkedin.com/in/kevin-josh10" target="_blank">LinkedIn</a></p>
-    <p><a class="email" href="mailto:kingkevinjosh7@gmail.com">kingkevinjosh7@gmail.com</a></p>
-  </div>
+<section class="section">
+  <h2 class="neon">Contact</h2>
+  <p>
+    <a class="linkedin" href="https://www.linkedin.com/in/kevin-josh10" target="_blank">
+      LinkedIn
+    </a>
+  </p>
+  <p class="email">kingkevinjosh7@gmail.com</p>
 </section>
 
 <script src="main1.js"></script>
