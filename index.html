@@ -8,9 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        #content-wrapper { display: none; }
+        #content-wrapper.show { display: block; }
+        .section { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+        .section.show { opacity: 1; transform: translateY(0); }
+    </style>
 </head>
 <body>
     <canvas id="stars-canvas"></canvas>
+    
     <div class="container">
         <header>
             <h1 class="neon-glow title-float">Kevin Joshua</h1>
@@ -20,45 +27,74 @@
             </div>
         </header>
 
-        <section id="about" class="section drift-in" data-drift="random">
-            <h2 class="neon-glow">About Me</h2>
-            <p>I'm an 18-year-old first-year B.E. Computer Science & Engineering student at Jerusalem College of Engineering. With a strong interest in Cloud Engineering, I'm currently preparing for AWS Cloud Practitioner. I focus on practical, real-world cloud projects with my long-term goal to become a Cloud Engineer at a top tech company.</p>
-        </section>
+        <div id="content-wrapper">
+            <section id="about" class="section">
+                <h2 class="neon-glow">About Me</h2>
+                <p>I'm an 18-year-old first-year B.E. Computer Science & Engineering student at Jerusalem College of Engineering. With a strong interest in Cloud Engineering, I'm currently preparing for AWS Cloud Practitioner. I focus on practical, real-world cloud projects with my long-term goal to become a Cloud Engineer at a top tech company.</p>
+            </section>
 
-        <section id="roadmap" class="section drift-in" data-drift="random">
-            <h2 class="neon-glow">AWS Roadmap</h2>
-            <ol class="roadmap-list">
-                <li>Cloud Practitioner</li>
-                <li>Solutions Architect Associate</li>
-                <li>Solutions Architect Professional</li>
-                <li>Security Specialty</li>
-            </ol>
-        </section>
+            <section id="roadmap" class="section">
+                <h2 class="neon-glow">AWS Roadmap</h2>
+                <ol class="roadmap-list">
+                    <li>Cloud Practitioner</li>
+                    <li>Solutions Architect Associate</li>
+                    <li>Solutions Architect Professional</li>
+                    <li>Security Specialty</li>
+                </ol>
+            </section>
 
-        <section id="skills" class="section drift-in" data-drift="random">
-            <h2 class="neon-glow">Skills</h2>
-            <ul>
-                <li>AWS</li>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-            </ul>
-        </section>
+            <section id="skills" class="section">
+                <h2 class="neon-glow">Skills</h2>
+                <ul>
+                    <li>AWS</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                </ul>
+            </section>
 
-        <section id="projects" class="section drift-in" data-drift="random">
-            <h2 class="neon-glow">Project</h2>
-            <h3>Geofenced Smart Attendance System</h3>
-            <p>A cloud-based system that allows attendance only within a 300-meter physical radius. Built using AWS S3, Lambda, API Gateway, and DynamoDB, emphasizing scalability, security, and real-world use.</p>
-        </section>
+            <section id="projects" class="section">
+                <h2 class="neon-glow">Project</h2>
+                <h3>Geofenced Smart Attendance System</h3>
+                <p>A cloud-based system that allows attendance only within a 300-meter physical radius. Built using AWS S3, Lambda, API Gateway, and DynamoDB, emphasizing scalability, security, and real-world use.</p>
+            </section>
 
-        <section id="contact" class="section drift-in" data-drift="random">
-            <h2 class="neon-glow">Contact</h2>
-            <div class="contact-links">
-                <a href="https://www.linkedin.com/in/kevin-josh10" target="_blank" class="linkedin">LinkedIn</a>
-                <a href="mailto:kingkevinjosh7@gmail.com" class="email">Email</a>
-            </div>
-        </section>
+            <section id="contact" class="section">
+                <h2 class="neon-glow">Contact</h2>
+                <div class="contact-links">
+                    <a href="https://www.linkedin.com/in/kevin-josh10" target="_blank" class="linkedin">LinkedIn</a>
+                    <a href="mailto:kingkevinjosh7@gmail.com" class="email">Email</a>
+                </div>
+            </section>
+        </div>
     </div>
+
     <script src="main1.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const knowBtn = document.getElementById('know-btn');
+            const contentWrapper = document.getElementById('content-wrapper');
+            const sections = document.querySelectorAll('.section');
+            const knowContainer = document.getElementById('know-container');
+
+            knowBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                knowContainer.style.opacity = '0';
+                knowContainer.style.transition = 'opacity 0.5s ease-out';
+                
+                setTimeout(() => {
+                    knowContainer.style.display = 'none';
+                    contentWrapper.classList.add('show');
+                }, 500);
+
+                sections.forEach((section, index) => {
+                    setTimeout(() => {
+                        section.classList.add('show');
+                    }, 600 + (index * 200));
+                });
+            });
+        });
+    </script>
 </body>
 </html>

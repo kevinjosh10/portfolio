@@ -120,6 +120,14 @@ header {
     overflow: hidden;
 }
 
+#content-wrapper { 
+    display: none; 
+}
+
+#content-wrapper.show { 
+    display: block; 
+}
+
 .section { 
     max-width: 700px; 
     margin: 0 auto 3rem; 
@@ -129,17 +137,14 @@ header {
     border: 1px solid rgba(0, 245, 255, 0.2);
     border-radius: 20px;
     position: relative;
-}
-
-.drift-in { 
     opacity: 0; 
-    transform: translate(var(--drift-x, 0), var(--drift-y, 100px)) scale(0.7) rotateY(10deg); 
-    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(50px); 
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.drift-in.show { 
+.section.show { 
     opacity: 1; 
-    transform: translate(0, 0) scale(1) rotateY(0deg); 
+    transform: translateY(0); 
 }
 
 .section h2 { 
@@ -187,7 +192,6 @@ ul li:hover {
     border-color: #00f5ff;
 }
 
-/* AWS Roadmap Styling */
 .roadmap-list { 
     list-style: none; 
     counter-reset: roadmap;
@@ -282,11 +286,6 @@ ul li:hover {
     box-shadow: 0 15px 30px rgba(0,245,255,0.4);
 }
 
-.hidden { 
-    display: none; 
-}
-
-/* Milky Way drift overlay */
 body::before {
     content: ''; 
     position: fixed; 
@@ -309,7 +308,6 @@ body::before {
     66% { transform: translateX(1%) translateY(-2%) rotate(-0.5deg); }
 }
 
-/* Mobile-first responsive */
 @media (max-width: 768px) { 
     .container { padding: 15px; } 
     .section { padding: 1.5rem 1rem; margin-bottom: 2rem; }
