@@ -10,36 +10,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <canvas id="bg-canvas"></canvas>
+    <canvas id="stars-canvas"></canvas>
     <div class="container">
         <header>
-            <h1 class="neon-glow">Kevin Joshua</h1>
-            <p>Cloud Engineering Enthusiast</p>
-            <button id="know-btn" class="neon-btn">Know About Me</button>
+            <h1 class="neon-glow title-float">Kevin Joshua</h1>
+            <p class="subtitle">Cloud Engineering Enthusiast</p>
+            <div id="know-container">
+                <button id="know-btn" class="neon-btn particle-fade">Know About Me</button>
+            </div>
         </header>
 
-        <section id="about" class="section hidden">
+        <section id="about" class="section drift-in" data-drift="random">
             <h2 class="neon-glow">About Me</h2>
-            <p>I'm an 18-year-old first-year B.E. Computer Science & Engineering student at Jerusalem College of Engineering. With a strong interest in Cloud Engineering, I'm currently preparing for AWS Cloud Practitioner and following this certification roadmap: Cloud Practitioner → Solutions Architect Associate → Solutions Architect Professional → Security Specialty. I focus on practical, real-world cloud projects with my long-term goal to become a Cloud Engineer at a top tech company.</p>
+            <p>I'm an 18-year-old first-year B.E. Computer Science & Engineering student at Jerusalem College of Engineering. With a strong interest in Cloud Engineering, I'm currently preparing for AWS Cloud Practitioner. I focus on practical, real-world cloud projects with my long-term goal to become a Cloud Engineer at a top tech company.</p>
         </section>
 
-        <section id="skills" class="section hidden">
+        <section id="roadmap" class="section drift-in" data-drift="random">
+            <h2 class="neon-glow">AWS Roadmap</h2>
+            <ol class="roadmap-list">
+                <li>Cloud Practitioner</li>
+                <li>Solutions Architect Associate</li>
+                <li>Solutions Architect Professional</li>
+                <li>Security Specialty</li>
+            </ol>
+        </section>
+
+        <section id="skills" class="section drift-in" data-drift="random">
             <h2 class="neon-glow">Skills</h2>
             <ul>
                 <li>AWS</li>
                 <li>HTML</li>
                 <li>CSS</li>
-                <li>JavaScript</li>
             </ul>
         </section>
 
-        <section id="projects" class="section hidden">
+        <section id="projects" class="section drift-in" data-drift="random">
             <h2 class="neon-glow">Project</h2>
             <h3>Geofenced Smart Attendance System</h3>
             <p>A cloud-based system that allows attendance only within a 300-meter physical radius. Built using AWS S3, Lambda, API Gateway, and DynamoDB, emphasizing scalability, security, and real-world use.</p>
         </section>
 
-        <section id="contact" class="section hidden">
+        <section id="contact" class="section drift-in" data-drift="random">
             <h2 class="neon-glow">Contact</h2>
             <div class="contact-links">
                 <a href="https://www.linkedin.com/in/kevin-josh10" target="_blank" class="linkedin">LinkedIn</a>

@@ -1,51 +1,326 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
 body { 
     font-family: 'Space Grotesk', sans-serif; 
     overflow-x: hidden; 
     color: #dfe0e4; 
     min-height: 100vh;
-}
-#bg-canvas { 
-    position: fixed; top: 0; left: 0; z-index: -1; 
-}
-.container { 
-    max-width: 800px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; 
-    display: flex; flex-direction: column; min-height: 100vh; justify-content: center;
-}
-header { text-align: center; padding: 2rem 1rem; }
-.neon-glow { 
-    text-shadow: 0 0 5px #00f5ff, 0 0 10px #00f5ff, 0 0 15px #00f5ff, 0 0 20px #00f5ff; 
-    color: #fff; font-size: clamp(2rem, 5vw, 4rem); font-weight: 700; margin-bottom: 1rem;
-    animation: glow 2s ease-in-out infinite alternate; 
-}
-@keyframes glow { from { text-shadow: 0 0 5px #00f5ff, 0 0 10px #00f5ff, 0 0 20px #00f5ff; } to { text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff, 0 0 30px #00f5ff; } }
-.neon-btn { 
-    background: transparent; border: 2px solid #00f5ff; color: #00f5ff; padding: 1rem 2rem; 
-    font-size: 1.2rem; cursor: pointer; border-radius: 50px; transition: all 0.3s; 
-    box-shadow: 0 0 10px #00f5ff; font-family: inherit;
-}
-.neon-btn:hover { box-shadow: 0 0 20px #00f5ff; transform: scale(1.05); }
-.section { 
-    opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; padding: 2rem 1rem; 
-    max-width: 600px; margin: 0 auto;
-}
-.section.show { opacity: 1; transform: translateY(0); }
-.section h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 1rem; }
-.section h3 { color: #00f5ff; margin-bottom: 0.5rem; }
-.section p { line-height: 1.6; font-size: 1.1rem; }
-ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; }
-ul li { background: rgba(0,245,255,0.1); padding: 1rem; border-radius: 10px; text-align: center; border: 1px solid rgba(0,245,255,0.3); }
-.contact-links { display: flex; flex-direction: column; gap: 1rem; }
-.linkedin { color: #0077b5; font-size: 1.2rem; text-decoration: none; padding: 1rem; background: rgba(0,119,181,0.1); border-radius: 10px; border: 1px solid #0077b5; transition: all 0.3s; }
-.linkedin:hover { background: #0077b5; color: white; }
-.email { color: #fff; font-size: 1.2rem; text-decoration: none; padding: 1rem; background: rgba(0,245,255,0.1); border-radius: 10px; border: 1px solid #00f5ff; transition: all 0.3s; }
-.email:hover { background: #00f5ff; color: #000; }
-.hidden { display: none; }
-@media (min-width: 768px) { .container { padding: 40px; } .section { padding: 3rem; } }
-/* Milky Way gradient drift */
-body::before {
-    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
     background: radial-gradient(ellipse at bottom, #1b1b33 0%, #0f0f23 50%, #000 100%);
-    animation: drift 20s ease-in-out infinite;
+    position: relative;
 }
-@keyframes drift { 0%, 100% { transform: translateX(0) translateY(0); } 50% { transform: translateX(-5%) translateY(-3%); } }
+
+#stars-canvas { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: -1; 
+    width: 100%; 
+    height: 100vh;
+}
+
+.container { 
+    max-width: 800px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    position: relative; 
+    z-index: 10; 
+    display: flex; 
+    flex-direction: column; 
+    min-height: 100vh; 
+    justify-content: center;
+}
+
+header { 
+    text-align: center; 
+    padding: 2rem 1rem; 
+}
+
+.neon-glow { 
+    text-shadow: 
+        0 0 5px #00f5ff, 
+        0 0 10px #00f5ff, 
+        0 0 15px #00f5ff, 
+        0 0 20px #00f5ff, 
+        0 0 30px #00f5ff;
+    color: #fff; 
+    font-size: clamp(2.5rem, 6vw, 5rem); 
+    font-weight: 700; 
+    margin-bottom: 1rem;
+    animation: glow 3s ease-in-out infinite alternate; 
+}
+
+@keyframes glow { 
+    from { 
+        text-shadow: 
+            0 0 5px #00f5ff, 
+            0 0 10px #00f5ff, 
+            0 0 20px #00f5ff,
+            0 0 30px #00f5ff;
+    } 
+    to { 
+        text-shadow: 
+            0 0 10px #00f5ff, 
+            0 0 20px #00f5ff, 
+            0 0 40px #00f5ff,
+            0 0 50px #00f5ff;
+    } 
+}
+
+.title-float { 
+    animation: float 6s ease-in-out infinite; 
+}
+
+@keyframes float { 
+    0%, 100% { transform: translateY(0px); } 
+    50% { transform: translateY(-25px); } 
+}
+
+.subtitle { 
+    font-size: clamp(1.2rem, 3vw, 1.5rem); 
+    margin: 1.5rem 0; 
+    opacity: 0.9; 
+    font-weight: 400;
+}
+
+#know-container { 
+    position: relative; 
+    display: inline-block;
+}
+
+.neon-btn { 
+    background: transparent; 
+    border: 2px solid #00f5ff; 
+    color: #00f5ff; 
+    padding: 1.2rem 2.5rem; 
+    font-size: 1.3rem; 
+    cursor: pointer; 
+    border-radius: 50px; 
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    box-shadow: 
+        0 0 15px rgba(0, 245, 255, 0.3),
+        inset 0 0 10px rgba(0, 245, 255, 0.1);
+    font-family: inherit;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.neon-btn:hover { 
+    box-shadow: 
+        0 0 30px rgba(0, 245, 255, 0.6),
+        inset 0 0 20px rgba(0, 245, 255, 0.2);
+    transform: translateY(-3px) scale(1.05); 
+}
+
+.particle-fade { 
+    overflow: hidden;
+}
+
+.section { 
+    max-width: 700px; 
+    margin: 0 auto 3rem; 
+    padding: 2.5rem 2rem; 
+    background: rgba(10, 15, 30, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    border-radius: 20px;
+    position: relative;
+}
+
+.drift-in { 
+    opacity: 0; 
+    transform: translate(var(--drift-x, 0), var(--drift-y, 100px)) scale(0.7) rotateY(10deg); 
+    transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.drift-in.show { 
+    opacity: 1; 
+    transform: translate(0, 0) scale(1) rotateY(0deg); 
+}
+
+.section h2 { 
+    font-size: clamp(1.8rem, 5vw, 3rem); 
+    margin-bottom: 1.5rem; 
+    text-align: center;
+}
+
+.section h3 { 
+    color: #00f5ff; 
+    font-size: 1.4rem; 
+    margin: 1rem 0 0.8rem; 
+    text-align: center;
+}
+
+.section p { 
+    line-height: 1.8; 
+    font-size: 1.15rem; 
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+ul { 
+    list-style: none; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
+    gap: 1.2rem; 
+    justify-items: center;
+}
+
+ul li { 
+    background: rgba(0, 245, 255, 0.1); 
+    padding: 1.2rem 1.5rem; 
+    border-radius: 15px; 
+    text-align: center; 
+    border: 1px solid rgba(0, 245, 255, 0.4); 
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0, 245, 255, 0.1);
+}
+
+ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 245, 255, 0.2);
+    border-color: #00f5ff;
+}
+
+/* AWS Roadmap Styling */
+.roadmap-list { 
+    list-style: none; 
+    counter-reset: roadmap;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.roadmap-list li { 
+    counter-increment: roadmap; 
+    background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(0,150,255,0.1)); 
+    padding: 1.5rem 2rem; 
+    margin: 1rem 0; 
+    border-radius: 15px; 
+    border-left: 5px solid #00f5ff;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 245, 255, 0.1);
+}
+
+.roadmap-list li::before { 
+    content: counter(roadmap); 
+    position: absolute; 
+    left: -35px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: linear-gradient(45deg, #00f5ff, #00bfff); 
+    color: #000; 
+    width: 30px; 
+    height: 30px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold; 
+    font-size: 1rem;
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+}
+
+.roadmap-list li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 15px 35px rgba(0, 245, 255, 0.25);
+}
+
+.contact-links { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5rem; 
+    justify-content: center;
+}
+
+.linkedin { 
+    color: #0077b5; 
+    font-size: 1.3rem; 
+    text-decoration: none; 
+    padding: 1.3rem 2rem; 
+    background: rgba(0,119,181,0.15); 
+    border-radius: 15px; 
+    border: 2px solid #0077b5; 
+    transition: all 0.4s ease;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,119,181,0.2);
+}
+
+.linkedin:hover { 
+    background: linear-gradient(45deg, #0077b5, #005f8d); 
+    color: white; 
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,119,181,0.4);
+}
+
+.email { 
+    color: #00f5ff; 
+    font-size: 1.3rem; 
+    text-decoration: none; 
+    padding: 1.3rem 2rem; 
+    background: rgba(0,245,255,0.15); 
+    border-radius: 15px; 
+    border: 2px solid #00f5ff; 
+    transition: all 0.4s ease;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,245,255,0.2);
+}
+
+.email:hover { 
+    background: linear-gradient(45deg, #00f5ff, #00d4ff); 
+    color: #000; 
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,245,255,0.4);
+}
+
+.hidden { 
+    display: none; 
+}
+
+/* Milky Way drift overlay */
+body::before {
+    content: ''; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: -1;
+    background: 
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(120,119,198,0.3) 0%, transparent 50%),
+        radial-gradient(ellipse 20% 30% at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 20% 30%, rgba(120,119,198,0.2) 0%, transparent 50%);
+    animation: milkyDrift 25s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes milkyDrift { 
+    0%, 100% { transform: translateX(0%) translateY(0%) rotate(0deg); } 
+    33% { transform: translateX(-2%) translateY(-1%) rotate(0.5deg); }
+    66% { transform: translateX(1%) translateY(-2%) rotate(-0.5deg); }
+}
+
+/* Mobile-first responsive */
+@media (max-width: 768px) { 
+    .container { padding: 15px; } 
+    .section { padding: 1.5rem 1rem; margin-bottom: 2rem; }
+    .neon-glow { font-size: clamp(2rem, 8vw, 3.5rem); }
+    ul { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; }
+    .roadmap-list li { padding: 1.2rem 1.5rem; }
+    .roadmap-list li::before { left: -28px; width: 26px; height: 26px; font-size: 0.9rem; }
+}
+
+@media (min-width: 768px) { 
+    .container { padding: 40px; } 
+    .section { padding: 3rem; }
+    .contact-links { flex-direction: row; justify-content: center; }
+}
